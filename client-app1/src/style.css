@@ -1,0 +1,793 @@
+@font-face {
+  font-family: "manifa-regular";
+  src: url(../fonts/manifa_pro_regular.woff);
+}
+
+@font-face {
+  font-family: "manifa-semi-bold";
+  src: url(../fonts/manifa_pro_semi_bold.woff);
+}
+
+/* body {
+position: fixed;
+width: 100%;
+height: calc(100% + 50px);
+} */
+
+*,
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  position: relative;
+  min-height: 100vh;
+  height: 100%;
+}
+
+.main__wrapper {
+  max-width: 1327px;
+  display: flex;
+  flex-direction: column;
+  /* grid-template-rows: auto 1fr auto;
+  display: grid; */
+  /* 20px smaller, to fit the paddings on the sides */
+
+  padding-right: 20px;
+  padding-left: 20px;
+  /* padding: 40px 20px; */
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+body {
+  /* background: url(./bg.jpg); */
+  background-size: cover;
+  background-repeat: no-repeat;
+  font-family: "manifa-semi-bold";
+  color: #ffffff;
+  padding: env(safe-area-inset);
+}
+
+/* Header */
+.header {
+  display: flex;
+  flex-direction: row;
+  margin: 40px 0 50px 0;
+  align-items: flex-end;
+}
+
+.header img {
+  width: 200px;
+}
+
+.header p {
+  margin-right: auto;
+  font-size: 25px;
+  line-height: initial;
+  text-transform: uppercase;
+}
+
+.header svg {
+  margin-right: 7px;
+  top: 2px;
+  position: relative;
+  width: 20px;
+  height: 20px;
+}
+
+/* .card__header svg {
+  margin-right: 7px;
+  top: 2px;
+  position: relative;
+  font-size: 50px;
+  width: 25px;
+  height: 25px;
+} */
+
+/* Cards*/
+
+.cards {
+  display: grid;
+  gap: 20px;
+  grid-auto-flow: dense;
+  grid-template-columns: repeat(4, 1fr);
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  /* padding-bottom: 50px; */
+  /* text-transform: uppercase; */
+  /* -webkit-transform: all 1s;
+    -ms-transform: all 1s;
+    transform: all 1s */
+}
+.cards__main__wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.card {
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 15px;
+  background-size: cover;
+  background-position: center;
+}
+
+.card__wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+}
+.card__header__detail {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.card__header {
+  font-family: "manifa-regular";
+  font-size: 25px;
+  border-bottom: 10px solid;
+  border-image-slice: 1;
+  border-width: 1px;
+  border-image-source: linear-gradient(50deg, #43ae45, #3f8ccd);
+  /* border-bottom: 1px solid rgb(255 255 255 / 50%); */
+  margin: 25px 0;
+  line-height: 2;
+  /* text-transform: uppercase; */
+}
+
+.card .title {
+  font-size: 34px;
+  margin-bottom: 25px;
+  height: 60px;
+  line-height: 100%;
+
+  /* font-weight: default; */
+}
+.card .description {
+  font-size: 20px;
+  line-height: 100%;
+  margin-bottom: 50px;
+  /* font-weight: default; */
+}
+.bg__overlay {
+  background-color: rgba(0, 0, 0, 0.45);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.card .qr_code_img {
+  width: 100%;
+  margin-top: 50px;
+  /* font-weight: default; */
+}
+
+.survey h2.title {
+  /* font-family: "manifa-regular"; */
+  margin-bottom: 40px;
+}
+
+.grid > * {
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  /* align-items: flex-start; */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Survey */
+
+/* The container */
+.container__radio {
+  display: block;
+  position: relative;
+  padding-left: 105px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 25px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.container__radio input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100px;
+  width: 100px;
+  /* background-color: #3f8ccd; */
+  background-color: rgb(0 0 0 / 20%);
+  /* background: linear-gradient(to right, #43ae45, #3f8ccd); */
+
+  /* border-radius: 0%; */
+  transition: all 0.15s;
+  border: 10px solid;
+  border-image-slice: 1;
+  border-width: 2px;
+  border-image-source: linear-gradient(50deg, #43ae45, #3f8ccd);
+}
+
+/* When the radio button is checked, add a blue background */
+.container__radio input:checked ~ .checkmark {
+  background: linear-gradient(50deg, #43ae45, #3f8ccd);
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.container__radio input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.container__radio .checkmark:after {
+  width: 50%;
+  height: 50%;
+  border-radius: 0%;
+  /* background: white; */
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.radio__label__text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  color: #ffffff;
+  transform: translate(-50%, -50%);
+}
+
+.radio__group {
+  display: flex;
+  justify-content: space-between;
+  height: fit-content;
+  height: 100px;
+}
+
+.question {
+  margin: 50px 0;
+}
+
+textarea {
+  margin-top: 10px;
+  /* margin-left: 50px; */
+  width: 100%;
+  height: 120px;
+  -moz-border-bottom-colors: none;
+  -moz-border-left-colors: none;
+  -moz-border-right-colors: none;
+  -moz-border-top-colors: none;
+  /* background: none repeat scroll 0 0 rgba(0, 0, 0, 0.07); */
+  /* border-color: -moz-use-text-color #FFFFFF #FFFFFF -moz-use-text-color; */
+  border-image: none;
+  /* border-radius: 6px 6px 6px 6px; */
+  border-style: none solid solid none;
+  border-width: medium 1px 1px medium;
+  /* box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12) inset; */
+  color: #fff;
+  /* font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; */
+  font-size: 15px;
+  line-height: 1.4em;
+  padding: 5px 8px;
+  transition: background-color 0.2s ease 0s;
+
+  background-color: rgb(0 0 0 / 20%);
+  border: 10px solid;
+  border-image-slice: 1;
+  border-width: 2px;
+  border-image-source: linear-gradient(50deg, #43ae45, #3f8ccd);
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin-bottom: 30px;
+}
+
+textarea:focus {
+  background-color: rgb(0 0 0 / 20%);
+  outline-width: 0;
+  outline: none;
+}
+
+textarea::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: rgba(255, 255, 255, 0.5);
+  opacity: 1;
+  /* Firefox */
+}
+
+textarea:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: rgba(255, 255, 255, 0.5);
+}
+
+textarea::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.submit__btn {
+  background: linear-gradient(50deg, #43ae45, #3f8ccd);
+  /* width: 200px;
+    height: 50px; */
+  padding: 10px 60px 15px 60px;
+  border: none;
+  font-size: 25px;
+  font-family: "manifa-regular";
+  /* line-height: 0.7; */
+  color: #fff;
+}
+
+/* QR Code Analytics */
+
+.qr__code__wrapper {
+  display: grid;
+  gap: 20px;
+  grid-auto-flow: dense;
+  grid-template-columns: repeat(3, 1fr);
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.card__counter.total {
+  background: rgb(46, 99, 47);
+  background: linear-gradient(
+    90deg,
+    rgba(46, 99, 47, 1) 0%,
+    rgba(67, 174, 78, 1) 100%
+  );
+}
+
+.card__counter.unique {
+  background: rgb(63, 85, 205);
+  background: linear-gradient(
+    90deg,
+    rgba(63, 85, 205, 1) 0%,
+    rgba(63, 140, 205, 1) 100%
+  );
+}
+
+.card__counter {
+  border-radius: 10px;
+  box-shadow: 0 2px 15px -3px rgba(0, 0, 0, 0.16),
+    0 10px 20px -2px rgba(0, 0, 0, 0.1) !important;
+  position: relative;
+  padding: 15px;
+}
+
+.qr__code__wrapper img {
+  box-shadow: 0 2px 15px -3px rgba(0, 0, 0, 0.16),
+    0 10px 20px -2px rgba(0, 0, 0, 0.1) !important;
+}
+
+.counter__number {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  font-size: 70px;
+}
+
+.counter__label {
+  font-size: 15px;
+  border-bottom: 1px solid rgb(255 255 255 / 30%);
+  display: block;
+  padding-bottom: 5px;
+  /* text-transform: uppercase; */
+}
+
+.dashboard .header p {
+  color: #5f646a;
+}
+
+.dashboard .header p svg {
+  display: none;
+}
+
+.logout__dashboard {
+  color: #5f646a;
+  display: flex;
+  position: absolute;
+  top: 10px;
+  right: 0;
+  font-size: 17px;
+  gap: 10px;
+  align-items: center;
+  text-transform: uppercase;
+}
+
+.logout__dashboard svg {
+  width: 25px;
+  height: 25px;
+  fill: #5f646a;
+  top: 2px;
+  position: relative;
+}
+
+.logout__dashboard svg:hover {
+  fill: #43ae45;
+}
+
+button.dashboard__btn {
+  background: #5f646a;
+  padding: 10px 30px 15px 30px;
+  border: none;
+  font-size: 15px;
+  font-family: "manifa-regular";
+  color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 15px -3px rgb(0 0 0 / 16%),
+    0 10px 20px -2px rgb(0 0 0 / 10%) !important;
+  margin-bottom: 30px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  text-transform: uppercase;
+}
+
+button.dashboard__btn:hover {
+  background: #85898d;
+}
+
+button.dashboard__btn svg {
+  width: 20px;
+  height: 20px;
+  position: relative;
+}
+
+.dashboard footer {
+  color: #5f646a;
+}
+
+.dashboard.login__page form {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  gap: 10px;
+}
+
+.dashboard.login__page input[type="text"],
+.dashboard.login__page input[type="password"] {
+  height: 30px;
+  max-width: 300px;
+  padding: 5px 10px;
+  height: 30px;
+  max-width: 300px;
+  /* border-radius: 5px; */
+  padding: 5px 10px;
+  border: 1px solid #5f646a;
+  /* box-shadow: 0 2px 15px -3px rgb(0 0 0 / 16%), 0 10px 20px -2px rgb(0 0 0 / 10%) !important; */
+}
+
+.dashboard.login__page input[type="text"]:focus,
+.dashboard.login__page input[type="password"]:focus {
+  border-bottom: 10px solid;
+  border-image-slice: 1;
+  border-width: 1px;
+  border-image-source: linear-gradient(50deg, #43ae45, #3f8ccd);
+  outline-width: 0;
+  outline: none;
+}
+
+.dashboard.login__page .submit__btn {
+  font-size: 18px;
+  /* width: 120px; */
+  padding: 6px 0 10px;
+  /* border-radius: 5px; */
+  margin-top: 5px;
+  box-shadow: 0 2px 15px -3px rgb(0 0 0 / 16%),
+    0 10px 20px -2px rgb(0 0 0 / 10%) !important;
+}
+
+.login__text {
+  color: #5f646a;
+  margin-bottom: 35px;
+  border-bottom: 10px solid;
+  border-image-slice: 1;
+  border-width: 1px;
+  font-family: "manifa-regular";
+  border-image-source: linear-gradient(50deg, #43ae45, #3f8ccd);
+  padding-bottom: 10px;
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  /* .header {
+        margin-top: 10px;
+        margin-bottom: 50px;
+    } */
+
+  .header img {
+    width: 100px;
+  }
+
+  .header p {
+    font-size: 17px;
+    line-height: 0.8;
+  }
+
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+  .card__name {
+    font-size: 18px;
+  }
+
+  .card__year__season {
+    font-size: 20px;
+    right: 45px;
+    top: -20px;
+  }
+
+  .card__year_year {
+    font-size: 40px;
+  }
+
+  /* .card__header {
+    font-size: 20px;
+    margin: 35px 0;
+  } */
+
+  .reports .card:last-child .card__year__season {
+    font-size: 15px;
+    top: -15px;
+    /* color: red; */
+  }
+
+  .header svg {
+    width: initial;
+    height: initial;
+  }
+
+  /* .card__header svg {
+    width: 20px;
+    height: 20px;
+  } */
+
+  .card > p {
+    margin-left: 10px;
+    margin-top: -10px;
+  }
+
+  .card__link > p {
+    margin-left: unset;
+  }
+
+  /* footer {
+        margin-top: 70px !important;
+    } */
+
+  /* Survey */
+
+  /* The container */
+  .container__radio {
+    padding-left: 55px;
+  }
+
+  /* Create a custom radio button */
+  .checkmark {
+    height: 50px;
+    width: 50px;
+  }
+
+  .radio__label__text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 1;
+    color: #ffffff;
+    transform: translate(-50%, -50%);
+  }
+
+  .question {
+    margin: 50px 0;
+  }
+
+  .radio__group {
+    height: 50px;
+  }
+
+  .submit__btn {
+    font-size: 20px;
+  }
+}
+
+/* Tablets ----------- */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  /* Styles */
+  .card__header {
+    font-size: 20px;
+    margin: 30px 0;
+  }
+
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .card {
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    padding: 15px;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .card .title {
+    font-size: 25px;
+    margin-bottom: 10px;
+    height: 55px;
+    line-height: 100%;
+
+    /* font-weight: default; */
+  }
+
+  .card .description {
+    font-size: 15px;
+    /* line-height: 100%; */
+    margin-bottom: 30px;
+    /* font-weight: default; */
+  }
+  .card .qr_code_img {
+    margin-top: 15px;
+    /* font-weight: default; */
+  }
+
+  .main__wrapper {
+    max-width: 1140px;
+    /* 20px smaller, to fit the paddings on the sides */
+
+    padding-right: 40px;
+    padding-left: 40px;
+    margin: auto;
+  }
+
+  /* Survey */
+
+  /* The container */
+  .container__radio {
+    padding-left: 85px;
+  }
+
+  /* Create a custom radio button */
+  .checkmark {
+    height: 80px;
+    width: 80px;
+  }
+
+  .radio__label__text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 1;
+    color: #ffffff;
+    transform: translate(-50%, -50%);
+  }
+
+  .question {
+    margin: 20px 0;
+  }
+
+  .radio__group {
+    height: 90px;
+  }
+
+  .submit__btn {
+    font-size: 20px;
+  }
+}
+
+/* 
+    To be tested
+  ##Device = Tablets, Ipads (landscape)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media screen and (orientation: landscape) {
+  .cards {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .card {
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    padding: 20px;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .card .title {
+    font-size: 27px;
+    margin-bottom: 20px;
+    height: 30px;
+    line-height: 100%;
+
+    /* font-weight: default; */
+  }
+
+  .card .description {
+    font-size: 17px;
+    /* line-height: 100%; */
+    margin-bottom: 50px;
+    /* font-weight: default; */
+  }
+  .card .qr_code_img {
+    margin-top: 20px;
+    width: 100%;
+    /* margin: 25px auto 15px; */
+    /* font-weight: default; */
+  }
+
+  .questions__wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .question {
+    margin: 15px 0;
+    width: 30.3%;
+  }
+
+  .checkmark {
+    height: 50px;
+    width: 50px;
+  }
+
+  .radio__group {
+    height: 50px;
+    justify-content: unset;
+    height: 50px;
+    gap: 10px;
+  }
+
+  .container__radio {
+    padding-left: 55px;
+    margin-bottom: 0;
+  }
+}
+
+/* Desktops & laptops ----------- */
+@media only screen and (min-width: 1224px) {
+  /* Styles */
+}
+
+/* Medium devices (tablets, 640px and up) */
+/* @media only screen and (min-width: 640px) {
+  ...;
+} */
