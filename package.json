@@ -1,0 +1,13 @@
+{
+  "name": "react-express-vite-boilerplate",
+  "version": "1.0.0",
+  "description": "React app with an express backend using vite",
+  "scripts": {
+    "start": "concurrently \"cd ./server && npm run server\" \"cd ./client-app2 && npm run dev\""
+  },
+  "author": "Clarel Antoine",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^7.6.0"
+  }
+}
